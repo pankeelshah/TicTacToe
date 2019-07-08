@@ -1,12 +1,12 @@
 import React from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, Alert, BackHandler} from 'react-native';
-import { MaterialCommunityIcons as Icon} from 'react-native-vector-icons'
-import styles from './Styles.js';
-import {getWinner} from './GetWinner';
+import { StyleSheet, Text, View, TouchableOpacity, Alert, BackHandler } from 'react-native';
+import { MaterialCommunityIcons as Icon } from 'react-native-vector-icons'
 import { createAppContainer, createStackNavigator, StackActions, NavigationActions } from 'react-navigation';
-import Styles from './Styles.js';
-import {Button, SocialIcon, CheckBox} from 'react-native-elements'
+import { Button, SocialIcon, CheckBox } from 'react-native-elements'
 import { BorderlessButton } from 'react-native-gesture-handler';
+
+import {getWinner} from './GetWinner';
+import Styles from './Styles.js';
 
 class HomeScreen extends React.Component {
 
@@ -56,8 +56,16 @@ class HomeScreen extends React.Component {
           <Button
             buttonStyle = {{borderRadius: 5}}
             raised
+            title='Options'
+            onPress = {() => Alert.alert("not yet implemented")}
+          />
+        </View>
+
+        <View style = {Styles.button}>
+          <Button
+            buttonStyle = {{borderRadius: 5}}
+            raised
             title='Exit'
-            fontFamily='Comic Sans MS' 
             onPress = {() => this.backPressed()}
           />
         </View>
@@ -128,52 +136,54 @@ class GameScreen extends React.Component {
 
   renderIcon = (row, col) => {
     var value = this.state.gameState[row][col];
-    if (value == 1) return <Icon name = "close" style = {styles.tileX} />
-    else if (value == -1) return <Icon name = "circle-outline" style = {styles.tileO} />
+    if (value == 1) return <Icon name = "close" style = {Styles.tileX} />
+    else if (value == -1) return <Icon name = "circle-outline" style = {Styles.tileO} />
     else return <View/>
   }
 
   render() {
     return (
-      <View style={styles.container}>
+      <View style={Styles.container}>
         <View style = {{flexDirection: "row"}}>
-          <TouchableOpacity onPress = {() => this.onTilePress(0, 0)} style = {styles.tile}> 
+          <TouchableOpacity onPress = {() => this.onTilePress(0, 0)} style = {Styles.tile}> 
             {this.renderIcon(0, 0)}
           </TouchableOpacity> 
-          <TouchableOpacity onPress = {() => this.onTilePress(0, 1)} style = {styles.tile}> 
+          <TouchableOpacity onPress = {() => this.onTilePress(0, 1)} style = {Styles.tile}> 
             {this.renderIcon(0, 1)}
           </TouchableOpacity> 
-          <TouchableOpacity onPress = {() => this.onTilePress(0, 2)} style = {styles.tile}> 
+          <TouchableOpacity onPress = {() => this.onTilePress(0, 2)} style = {Styles.tile}> 
             {this.renderIcon(0, 2)}
           </TouchableOpacity> 
         </View>
 
         <View style = {{flexDirection: "row"}}>
-          <TouchableOpacity onPress = {() => this.onTilePress(1, 0)} style = {styles.tile}> 
+          <TouchableOpacity onPress = {() => this.onTilePress(1, 0)} style = {Styles.tile}> 
             {this.renderIcon(1, 0)}
           </TouchableOpacity> 
-          <TouchableOpacity onPress = {() => this.onTilePress(1, 1)} style = {styles.tile}> 
+          <TouchableOpacity onPress = {() => this.onTilePress(1, 1)} style = {Styles.tile}> 
             {this.renderIcon(1, 1)}
           </TouchableOpacity> 
-          <TouchableOpacity onPress = {() => this.onTilePress(1, 2)} style = {styles.tile}> 
+          <TouchableOpacity onPress = {() => this.onTilePress(1, 2)} style = {Styles.tile}> 
             {this.renderIcon(1, 2)}
           </TouchableOpacity> 
         </View>
 
         <View style = {{flexDirection: "row"}}>
-          <TouchableOpacity onPress = {() => this.onTilePress(2, 0)} style = {styles.tile}> 
+          <TouchableOpacity onPress = {() => this.onTilePress(2, 0)} style = {Styles.tile}> 
             {this.renderIcon(2, 0)}
           </TouchableOpacity> 
-          <TouchableOpacity onPress = {() => this.onTilePress(2, 1)} style = {styles.tile}> 
+          <TouchableOpacity onPress = {() => this.onTilePress(2, 1)} style = {Styles.tile}> 
             {this.renderIcon(2, 1)}
           </TouchableOpacity> 
-          <TouchableOpacity onPress = {() => this.onTilePress(2, 2)} style = {styles.tile}> 
+          <TouchableOpacity onPress = {() => this.onTilePress(2, 2)} style = {Styles.tile}> 
             {this.renderIcon(2, 2)}
           </TouchableOpacity> 
         </View>
+
         <View style = {{paddingTop: 20, width: '40%'}}>
           <Button title = "New Game" onPress = {this.onNewGamePress}/>
         </View>
+
         <View style = {Styles.button}>
           <Button
             title="Home"
