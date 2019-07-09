@@ -33,6 +33,12 @@ export default StyleSheet.create({
         fontWeight: "bold",
     },
 
+    regularText: {
+        color: "dodgerblue",
+        fontSize: 30,
+        fontWeight: "bold",
+    },
+
     button: {
         width: '40%',
         paddingTop: 10,

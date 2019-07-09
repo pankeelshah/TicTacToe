@@ -2,8 +2,8 @@ import React from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, Alert, BackHandler } from 'react-native';
 import { MaterialCommunityIcons as Icon } from 'react-native-vector-icons'
 import { createAppContainer, createStackNavigator, StackActions, NavigationActions } from 'react-navigation';
-import { Button, SocialIcon, CheckBox } from 'react-native-elements'
-import { BorderlessButton } from 'react-native-gesture-handler';
+import { Button, SocialIcon, CheckBox, ButtonGroup } from 'react-native-elements'
+
 
 import {getWinner} from './GetWinner';
 import Styles from './Styles.js';
@@ -56,8 +56,16 @@ class HomeScreen extends React.Component {
           <Button
             buttonStyle = {{borderRadius: 5}}
             raised
-            title='Options'
-            onPress = {() => Alert.alert("not yet implemented")}
+            title="Options"
+            onPress={() => {
+              this.props.navigation.dispatch(StackActions.reset({
+                index: 0,
+                paddingTop: 300,
+                actions: [
+                  NavigationActions.navigate({ routeName: 'Options' })
+                ],
+              }))
+            }}
           />
         </View>
 
@@ -203,12 +211,62 @@ class GameScreen extends React.Component {
   }
 }
 
+class OptionsScreen extends React.Component {
+
+  constructor () {
+    super()
+    this.state = {
+      selectedIndex: 0
+    }
+    this.updateIndex = this.updateIndex.bind(this)
+  }
+
+  updateIndex (selectedIndex) {
+    this.setState({selectedIndex})
+  }
+
+  render() {
+    const buttons = ['On', 'Off']
+    const { selectedIndex } = this.state
+
+    return (
+      <View style = {{alignItems: 'center', paddingTop: 200}}>
+        <View style = {{flexDirection: 'row'}}>
+          <Text style = {Styles.regularText}>Sound:</Text>
+          <ButtonGroup
+          containerStyle = {{width: "40%"}}
+            onPress={this.updateIndex}
+            selectedIndex={selectedIndex}
+            buttons={buttons} 
+          />
+        </View>
+        <View style = {Styles.button}>
+            <Button
+              title="Back"
+              onPress={() => {
+                this.props.navigation.dispatch(StackActions.reset({
+                  index: 0,
+                  actions: [
+                    NavigationActions.navigate({ routeName: 'Home' })
+                  ],
+                }))
+              }}
+            />
+        </View>
+      </View>
+    );
+  }
+}
+
 const AppNavigator = createStackNavigator({
     Home: {
       screen: HomeScreen,
     },
     Game: {
       screen: GameScreen,
+    },
+    Options: {
+      screen: OptionsScreen,
     },
   },
   {
